@@ -12,20 +12,7 @@ export default function Signup() {
   const [lastName, setLastName] = useState("");
   const router = useRouter();
 
- /*  const handleSignup = async () => {
-    if (!email || !password || !firstName || !lastName) {
-      Alert.alert("Error", "All fields are required.");
-      return;
-    }
 
-    try {
-      await createUserWithEmailAndPassword(auth, email, password);
-      Alert.alert("Success", "Account created successfully!");
-      router.push("/baker/login"); // Redirect to login after signup
-    } catch (error) {
-      Alert.alert("Signup Failed", error.message);
-    }
-  }; */
 
   return (
     <ImageBackground source={require("../../assets/images/login.jpg")} style={{ flex: 1, justifyContent: "center", padding: 20 }}>
