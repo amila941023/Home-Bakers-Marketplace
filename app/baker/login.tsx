@@ -3,11 +3,26 @@ import { View, Text, TextInput, Button, Alert, ImageBackground, TouchableOpacity
 import { useRouter } from "expo-router";
 import { StyleSheet } from "react-native";
 
+//Added Firebase imports
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../firebase/firebaseConfig"; //Adjust path to config
+
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
+
+  //Handle login with Firebase
+  const handleLogin = async () => {
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      Alert.alert("Login Successful", `Welcome back, ${email}!`);
+      router.push("/baker/home"); // Redirect after login
+    } catch (error: any) {
+      Alert.alert("Login Failed", error.message);
+    }
+  }; 
 
 return (
     <ImageBackground source={require("../../assets/images/login.jpg")} style={{ flex: 1, justifyContent: "center", padding: 20 }}>
@@ -15,13 +30,13 @@ return (
         <Text style={{ fontSize: 24, fontWeight: "bold", textAlign: "center", color: "white" }}>Baker Login</Text>
         <TextInput placeholder="Email" value={email} onChangeText={setEmail} keyboardType="email-address" style={styles.input} />
         <TextInput placeholder="Password" value={password} onChangeText={setPassword} secureTextEntry style={styles.input} />
-        <Button title="Login" onPress={()=>{}} color="blue"/>
+        <Button title="Login" onPress={handleLogin} color="blue"/>
 
        /* Sign Up Section */
        <View style={styles.signupContainer}>
           <Text style={{ color: "white", fontSize: 16 }}>Don't have an account?</Text>
           <TouchableOpacity onPress={() => router.push("/baker/signup")}>
-            <Text style={styles.signupText}> Sign Up</Text>
+            <Text style={styles.signupLink}> Sign Up</Text> {/* Changed to use styles.signupLink */}
           </TouchableOpacity>
         </View>    
       </View>
