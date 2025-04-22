@@ -5,7 +5,7 @@ import { StyleSheet } from "react-native";
 
 //Added Firebase imports
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../firebase/firebaseConfig"; //Adjust path to config
+import { auth, db } from "../../firebase/firebaseConfig"; //Adjust path to config
 
 
 export default function Login() {
@@ -22,7 +22,7 @@ export default function Login() {
     } catch (error: any) {
       Alert.alert("Login Failed", error.message);
     }
-  }; 
+  };  
 
 return (
     <ImageBackground source={require("../../assets/images/login.jpg")} style={{ flex: 1, justifyContent: "center", padding: 20 }}>
